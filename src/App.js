@@ -80,7 +80,15 @@ const App = () => {
           <ExpenseList handleDelete={handleDelete} handelAlert={handelAlert} expenses={expenses}></ExpenseList>
         </div>
         <div className="ExpensEnd">
-          <p>총지출:<span>원</span></p>
+          <p>
+            총지출:
+            <span>
+              {expenses.reduce((acc, curr) => {
+                return (acc += curr.amount)
+              }, 0)}
+              원
+            </span>
+          </p>
         </div>
       </main>
     )
