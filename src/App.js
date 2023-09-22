@@ -27,12 +27,12 @@ const App = () => {
     // charge가 빈값이 아니거나 amount가 0보다 클경우 실행
     if(charge !== "" && amount > 0) {
       const newExpense = {id: crypto.randomUUID(), charge, amount}
-      // 불변성을 지켜주기 위해서 새로운 expenses를 생성
+      // 불변성을 지켜주기 위해서 새로운 expenses를 생성  
       const newExpenses = [...expenses, newExpense];
       console.log(newExpenses);
       setExpenses(newExpenses);
-      setCharge("");
-      setamount(0);
+      setCharge(""); //값초기화
+      setamount(0); //값초기화
     } else {
       console.log("error")
     }
