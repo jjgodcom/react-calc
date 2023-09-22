@@ -8,10 +8,10 @@ import Alert from "./components/Alert";
 const App = () => {
 
   const [expenses, setExpenses] = useState(initialExpenses);
-
+  const [id, setId] = useState('')
   const [charge, setCharge] = useState(""); // 지출목록 이름 저장하기위해
   const [amount, setamount] = useState(0); // 금액 저장하기위해
-
+  const [edit, setEdit] = useState(false)
   const [alert, setAlert] = useState({ show: false});
 
   const handelCharge = (e) => {
@@ -31,6 +31,16 @@ const App = () => {
     }, 7000);
   }
 
+  const handelEdit = (id) => {
+    const expense = expenses.find(item => item.id === id);
+    const {charge,amount} = expense;
+    setId(id);
+    setCharge(charge);
+    setamount(amount)
+    setEdit(true)
+    console.log("aa");
+  }
+
   const handleDelete = (id) => {
     // 클릭한 id값과 배열에 있는 id값이 같을경우 제외하고 새로운 배열을 생성함
     const newExpense = expenses.filter(expense => expense.id !== id);
@@ -45,15 +55,23 @@ const App = () => {
     // crypto.randomUUID() : 랜덤한 고유 아이디 생성함
     // charge가 빈값이 아니거나 amount가 0보다 클경우 실행
     if(charge !== "" && amount > 0) {
-      const newExpense = {id: crypto.randomUUID(), charge, amount}
-      // 불변성을 지켜주기 위해서 새로운 expenses를 생성  
-      const newExpenses = [...expenses, newExpense];
-      // console.log(newExpenses);
-      setExpenses(newExpenses);
+      if(edit){
+        const newExpense = expenses.map(item => {
+          return item.id === id ? {...item, charge, amount} : item
+        })
+        setExpenses(newExpense);
+        setEdit(false);
+        handelAlert({type:"sucess",text:"아이템이 수정되었습니다."});
+      }else{
+        const newExpense = {id: crypto.randomUUID(), charge, amount}
+        // 불변성을 지켜주기 위해서 새로운 expenses를 생성  
+        const newExpenses = [...expenses, newExpense];
+        setExpenses(newExpenses);
+        // 값이 성공적으로 될경우에는 handelAlert 의 값을 긍정으로 수정
+        handelAlert({type:"sucess",text:"아이템이 생성되었습니다."});
+      }
       setCharge(""); //값초기화
       setamount(0); //값초기화
-      // 값이 성공적으로 될경우에는 handelAlert 의 값을 긍정으로 수정
-      handelAlert({type:"success",text:"아이템이 생성되었습니다."});
     } else {
       console.log("error");
       // 에러가 있을경우 부정적으로 출력
@@ -72,12 +90,19 @@ const App = () => {
             handelAmount={handelAmount}
             charge={charge}
             amount={amount}
-            handleSubmit={handleSubmit}>
+            handleSubmit={handleSubmit}
+            edit={edit}>
           </ExpenseFrom>
         </div>
         <div>
           {/* Expens List */}
-          <ExpenseList handleDelete={handleDelete} handelAlert={handelAlert} expenses={expenses}></ExpenseList>
+          <ExpenseList 
+            handleDelete={handleDelete}
+            handelAlert={handelAlert} 
+            handelEdit={handelEdit}
+            expenses={expenses}>
+
+            </ExpenseList>
         </div>
         <div className="ExpensEnd">
           <p>

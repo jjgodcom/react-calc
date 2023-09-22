@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdSend } from "react-icons/md";
 
-const ExpenseFrom = ({handelCharge, charge, handelAmount, amount, handleSubmit}) =>{
+const ExpenseFrom = ({handelCharge, charge, handelAmount, amount, handleSubmit, edit}) =>{
   
 
     return (
@@ -33,7 +33,7 @@ const ExpenseFrom = ({handelCharge, charge, handelAmount, amount, handleSubmit})
           </div>
         </div>
         <button type="submit" className='btn'>
-          제출
+          {edit ? "수정":"제출"}
           <MdSend className='btn-icon'/>
         </button>
       </form>
