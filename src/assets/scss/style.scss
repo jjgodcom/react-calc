@@ -1,0 +1,147 @@
+:root {
+  --primaryColor: #90A959;
+  --secondColor:#e9b872;
+  --mainWhite:#fff;
+  --mainBlack:#222;
+  --mainRed:#c45151;
+  --mainGreen:#4caf50;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--secondColor);
+  color: var(--mainBlack);
+}
+
+h1 {
+  margin: 1rem 0;
+}
+
+.btn {
+  text-decoration: none;
+  color:var(--mainWhite);
+  background-color: var(--primaryColor);
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+  outline: 0;
+  border: 0;
+  border-radius: 2px;
+  display: block;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  .btn-icon {
+    margin-left: 0.75rem;
+    font-size: 1.2rem;
+  }
+
+}
+
+.main-container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+  > div {
+    width: 100%;
+    background-color: white;
+    padding: 1rem;
+  }
+  .ExpensEnd {
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    p {
+      font-size: 2rem;
+    }
+  }
+}
+
+.form-center {
+  display: flex;
+  .form-group {
+    padding: 1rem 0.75rem;
+    flex: 1;
+    label {
+      display: block;
+      color: var(--secondColor);
+      font-size: 1rem;
+      text-transform: capitalize;
+    }
+    .form-control {
+      background-color: transparent;
+      border:none;
+      border-bottom: 1px solid var(--secondColor);
+      outline: none;
+      height: 3rem;
+      width: 100%;
+      font-size: 15px;
+      margin: 0 0 8px 0;
+      padding: 0;
+    }
+  }
+}
+
+.list {
+  list-style-type: none;
+  border: none;
+  padding: 0;
+}
+
+.item {
+  background-color: var(--mainWhite);
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin-bottom: 1rem;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.3s linear;
+
+  &:hover {
+    width: 100%;
+    transform: scale(1.02);
+  }
+
+  .info {
+    flex: 0 0 60%;
+    display: flex;
+    justify-content: space-between;
+
+    .expense {
+      margin-right: 2rem;
+    }
+
+    .amount {
+      font-weight: 300;
+      font-size: 1rem;
+      padding: 1px 3px;
+    }
+  }
+
+  .edit-btn,
+  .clear-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .edit-btn {
+    color:var(--mainGreen)
+  }
+
+  .clear-btn {
+    color:var(--mainRed)
+  }
+}
