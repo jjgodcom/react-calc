@@ -14,6 +14,10 @@ const App = () => {
   const [edit, setEdit] = useState(false)
   const [alert, setAlert] = useState({ show: false});
 
+  const clerItem = () => {
+    setExpenses([]);
+  }
+
   const handelCharge = (e) => {
     console.log(e.target.value);
     setCharge(e.target.value);
@@ -100,7 +104,8 @@ const App = () => {
             handleDelete={handleDelete}
             handelAlert={handelAlert} 
             handelEdit={handelEdit}
-            expenses={expenses}>
+            expenses={expenses}
+            clerItem={clerItem}>
 
             </ExpenseList>
         </div>
